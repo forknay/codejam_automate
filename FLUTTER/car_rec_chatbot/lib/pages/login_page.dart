@@ -3,7 +3,6 @@ import 'package:car_rec_chatbot/components/my_button.dart';
 import 'package:car_rec_chatbot/components/my_textfield.dart';
 import 'package:flutter/material.dart';
 
-import '../services/auth/auth_service.dart';
 
 class LoginPage extends StatelessWidget {
   // email and pw text controllers
