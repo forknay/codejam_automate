@@ -21,19 +21,24 @@ print('loading....')
 size = 100000
 while len(rows) < size:
     for index, row in all_data.iterrows():
-        stock = row['Stock']
-        # Generate all possible pairs of characteristics
         p1, p2, p3 = random.sample(characteristics, 3)
         #print(p1,p2,p3)
+        stock = row['Stock']
+        name = row['Model']
         if pd.notna(row.loc[p1]) and pd.notna(row.loc[p2]) and pd.notna(row.loc[p3]):
-            rows.append({'P1': (p1,row.loc[p1]), 'P2': (p2,row.loc[p2]), 'P3': (p3, row.loc[p3]), 'Output': stock})
+            temp_dict = {"messages":[{"role":"System","content":"You are a large language model trained by Cohere."},
+                                 {"role":"User","content":f"Hi!, I am looking for a car with {p1} {row.loc[p1]}, {p2} {row.loc[p2]} and {p3} {row.loc[p3]}"},
+                                 {"role":"Chatbot","content":f"I would recommend the {name} ({stock})"},
+                                 {"role":"User","content":"Thank you!"}]}
+                
+            rows.append(temp_dict)
 
 # Create the DataFrame once at the end
 prompts = pd.DataFrame(rows)
 
 # Print the resulting DataFrame
 print(len(prompts))
-print(prompts.tail())
+print(prompts.tail()[['messages']])
 print(prompts.dtypes)
 
-prompts.to_csv('prompts.csv', index=False)
+prompts.to_json('prompts.json', orient='records', lines=True)
