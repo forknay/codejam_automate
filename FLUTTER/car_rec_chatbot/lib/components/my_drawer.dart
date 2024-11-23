@@ -9,40 +9,51 @@ class MyDrawer extends StatelessWidget {
     return Drawer(
       backgroundColor: Theme.of(context).colorScheme.background,
       child: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          // logo
-          DrawerHeader(
-            child: Center(
-              child: Icon(
-                Icons.message,
-                color: Theme.of(context).colorScheme.primary,
-                size: 40,
+          Column(children: [
+                // logo
+                DrawerHeader(
+                  child: Center(
+                    child: Icon(
+                      Icons.message,
+                      color: Theme.of(context).colorScheme.primary,
+                      size: 40,
+                    ),
+                  ),
                 ),
-              ),
-            ),
-    
-          // home list tile
-          Padding(
-            padding: const EdgeInsets.only(25.0),
-            child: ListTile(
-              title: Text("H O M E"),
-              leading: Icon(Icons.home),
-              onTap: () {},
-            ),
-          ),
 
-          // settings list tile
-          Padding(
-            padding: const EdgeInsets.only(25.0),
-            child: ListTile(
-              title: Text("S E T T I N G S"),
-              leading: Icon(Icons.settings),
-              onTap: () {},
-            ),
-          ),
+                // home list tile
+                Padding(
+                  padding: const EdgeInsets.only(left: 25.0),
+                  child: ListTile(
+                    title: Text("H O M E"),
+                    leading: Icon(Icons.home),
+                    onTap: () {},
+                  ),
+                ),
 
-          // logout list tile
+                // settings list tile
+                Padding(
+                  padding: const EdgeInsets.only(left: 25.0),
+                  child: ListTile(
+                    title: Text("S E T T I N G S"),
+                    leading: Icon(Icons.settings),
+                    onTap: () {},
+                  ),
+                ),
 
+                // logout list tile
+                Padding(
+                  padding: const EdgeInsets.only(left: 25.0),
+                  child: ListTile(
+                    title: Text("L O G O U T"),
+                    leading: Icon(Icons.logout),
+                    onTap: () {},
+                  ),
+                ),
+              ],)
+          
 
         ],
       )
