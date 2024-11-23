@@ -1,10 +1,10 @@
-import 'package:car_rec_chatbot/auth/auth_gate.dart';
+import 'package:car_rec_chatbot/services/auth/auth_gate.dart';
 import 'package:car_rec_chatbot/firebase_options.dart';
 import 'package:car_rec_chatbot/pages/register_page.dart';
 import 'package:car_rec_chatbot/themes/light_mode.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'auth/login_or_register.dart';
+import 'services/auth/login_or_register.dart';
 import 'pages/login_page.dart';
 
 void main() async {

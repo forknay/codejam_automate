@@ -1,4 +1,4 @@
-import 'package:car_rec_chatbot/auth/login_or_register.dart';
+import 'package:car_rec_chatbot/services/auth/login_or_register.dart';
 import 'package:car_rec_chatbot/pages/home_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
