@@ -26,5 +26,6 @@
             "database": "airnb",
             "username": "root"
         }
-    ]
+    ],
+    "editor.formatOnType": true
 }
