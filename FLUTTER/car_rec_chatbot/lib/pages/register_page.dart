@@ -1,4 +1,4 @@
-import 'package:car_rec_chatbot/auth/auth_service.dart';
+import 'package:car_rec_chatbot/services/auth/auth_service.dart';
 import 'package:flutter/material.dart';
 
 import '../components/my_button.dart';
