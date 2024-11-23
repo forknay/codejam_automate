@@ -24,7 +24,7 @@ while len(rows) < size:
         stock = row['Stock']
         # Generate all possible pairs of characteristics
         p1, p2, p3 = random.sample(characteristics, 3)
-        print(p1,p2,p3)
+        #print(p1,p2,p3)
         if pd.notna(row.loc[p1]) and pd.notna(row.loc[p2]) and pd.notna(row.loc[p3]):
             rows.append({'P1': (p1,row.loc[p1]), 'P2': (p2,row.loc[p2]), 'P3': (p3, row.loc[p3]), 'Output': stock})
 
