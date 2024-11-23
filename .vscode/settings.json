@@ -14,5 +14,6 @@
             "username": "root"
         }
     ],
-    "editor.formatOnType": true
+    "editor.formatOnType": true,
+    "cmake.sourceDirectory": "/Users/paige/Documents/GitHub/codejam/FLUTTER/car_rec_chatbot/linux"
 }
