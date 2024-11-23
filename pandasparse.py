@@ -5,6 +5,7 @@ import itertools
 all_data = pd.read_csv('testdata.csv')
 
 # Define the list of characteristics
+
 characteristics = [
     'Type', 'Stock', 'Year', 'Make', 'Model', 'Body', 'ModelNumber', 'Doors', 'ExteriorColor', 
     'InteriorColor', 'EngineCylinders', 'EngineDisplacement', 'Transmission', 'Miles', 'SellingPrice', 
@@ -27,5 +28,6 @@ for index, row in all_data.iterrows():
         prompts = prompts._append({'P1': row[p1], 'P2': row[p2], 'Output': vin}, ignore_index=True)
 
 # Print the resulting DataFrame
-print(prompts.head(20))
 print(prompts.tail())
+
+prompts.to_csv('prompts.csv', index=False)
