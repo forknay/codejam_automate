@@ -41,4 +41,4 @@ print(len(prompts))
 print(prompts.tail()[['messages']])
 print(prompts.dtypes)
 
-prompts.to_json('prompts.json', orient='records', lines=True)
+prompts.to_json('prompts.jsonl', orient='records', lines=True)
