@@ -1,3 +1,4 @@
+import 'package:car_rec_chatbot/auth/auth_service.dart';
 import 'package:car_rec_chatbot/components/my_button.dart';
 import 'package:car_rec_chatbot/components/my_textfield.dart';
 import 'package:flutter/material.dart';
@@ -10,11 +11,33 @@ class LoginPage extends StatelessWidget {
   // tap to go to register page
   final void Function()? onTap;
 
-  LoginPage({super.key, required this.onTap,});
+  LoginPage({
+    super.key,
+    required this.onTap,
+  });
 
   // login method
-  void login() {
-    //
+  void login(BuildContext context) async {
+    // auth service
+    final authService = AuthService();
+
+    // try login
+    try {
+      await authService.signInWithEmailPassword(
+        _emailController.text, 
+        _pwController.text,
+      );
+    }
+
+    // catch any errors
+    catch (e) {
+      showDialog(
+        context: context, 
+        builder: (context) => AlertDialog(
+          title: Text(e.toString()),
+        ),
+      );
+    }
   }
 
   @override
@@ -66,7 +89,7 @@ class LoginPage extends StatelessWidget {
             // login button
             MyButton(
               text: "Login",
-              onTap: login,
+              onTap: () => login(context),
             ),
 
             const SizedBox(height: 25),
