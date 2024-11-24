@@ -1,5 +1,5 @@
+import 'package:car_rec_chatbot/pages/chat_page.dart';
 import 'package:car_rec_chatbot/services/auth/login_or_register.dart';
-import 'package:car_rec_chatbot/pages/home_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
@@ -14,7 +14,7 @@ class AuthGate extends StatelessWidget {
         builder: (context, snapshot) {
           // user is logged in
           if (snapshot.hasData) {
-            return HomePage();
+            return ChatPage(receiverID: "cfhCvGguwDZMXYIzT2OrjnaKon32", receiverEmail: "chat@matadore.ai", );
           }
 
           // user is NOT logged in
