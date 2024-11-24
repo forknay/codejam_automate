@@ -25,17 +25,17 @@ class ChatPage extends StatelessWidget {
   // for textfield focus
   FocusNode myFocusNode = FocusNode();
 
-  @override
-  void initState() {
-    super.initState();
+  //@override
+  //void initState() {
+  //  super.initState();
 
     // add listener to focus node
-    myFocusNode.addListener(() {
-      if (myFocusNode.hasFocus) {
+  //  myFocusNode.addListener(() {
+  //    if (myFocusNode.hasFocus) {
         // cause a delay
-      }
-    })
-  }
+  //    }
+  //  })
+  //}
 
   // send message
   void sendMessage() async {
@@ -50,8 +50,8 @@ class ChatPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text(receiverEmail),
-        backgroundColor: Colors.transparent,
-        foregroundColor: Colors.grey,
+        backgroundColor: Theme.of(context).colorScheme.surface,
+        foregroundColor: Theme.of(context).colorScheme.primary,
         elevation: 0,
       ),
       body: Column(
