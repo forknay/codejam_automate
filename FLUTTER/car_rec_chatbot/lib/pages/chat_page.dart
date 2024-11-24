@@ -1,4 +1,5 @@
 import 'package:car_rec_chatbot/components/chat_bubble.dart';
+import 'package:car_rec_chatbot/components/my_drawer.dart';
 import 'package:car_rec_chatbot/components/my_textfield.dart';
 import 'package:car_rec_chatbot/services/auth/auth_service.dart';
 import 'package:car_rec_chatbot/services/chat/chat_service.dart';
@@ -30,13 +31,13 @@ class _ChatPageState extends State<ChatPage> {
   // for textfield focus
   FocusNode myFocusNode = FocusNode();
 
-  //@override
-  //void initState() {
-  //  super.initState();
+  @override
+  void initState() {
+    super.initState();
 
     // scroll to bottom
     Future.delayed(
-      const Duration(milliseconds: 300),
+      const Duration(milliseconds: 500),
       () => scrollDown(),
     );
 
@@ -55,7 +56,7 @@ class _ChatPageState extends State<ChatPage> {
   void scrollDown() {
     _scrollController.animateTo(
       _scrollController.position.maxScrollExtent,
-      duration: const Duration(milliseconds: 700),
+      duration: const Duration(milliseconds: 500),
       curve: Curves.fastOutSlowIn,
     );
   }
@@ -73,13 +74,12 @@ class _ChatPageState extends State<ChatPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-
-        title: Text(widget.receiverEmail),
-        backgroundColor: Theme.of(context).colorScheme.surface,
+        title: Text("Home"),
+        backgroundColor: Colors.transparent,
         foregroundColor: Theme.of(context).colorScheme.primary,
-
         elevation: 0,
       ),
+      drawer: const MyDrawer(),
       body: Column(
         children: [
           // display all messages
