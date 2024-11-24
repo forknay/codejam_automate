@@ -30,22 +30,15 @@ class _ChatPageState extends State<ChatPage> {
   // for textfield focus
   FocusNode myFocusNode = FocusNode();
 
-  @override
-  void initState() {
-    super.initState();
+  //@override
+  //void initState() {
+  //  super.initState();
 
     // scroll to bottom
     Future.delayed(
       const Duration(milliseconds: 300),
       () => scrollDown(),
     );
-
-    // add listener to focus node
-    myFocusNode.addListener(() {
-      if (myFocusNode.hasFocus) {
-        
-      }
-    });
 
     
   }
@@ -62,7 +55,7 @@ class _ChatPageState extends State<ChatPage> {
   void scrollDown() {
     _scrollController.animateTo(
       _scrollController.position.maxScrollExtent,
-      duration: const Duration(seconds: 1),
+      duration: const Duration(milliseconds: 700),
       curve: Curves.fastOutSlowIn,
     );
   }
@@ -80,9 +73,11 @@ class _ChatPageState extends State<ChatPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+
         title: Text(widget.receiverEmail),
-        backgroundColor: Colors.transparent,
-        foregroundColor: Colors.grey,
+        backgroundColor: Theme.of(context).colorScheme.surface,
+        foregroundColor: Theme.of(context).colorScheme.primary,
+
         elevation: 0,
       ),
       body: Column(
