@@ -3,7 +3,8 @@ import itertools
 import random
 # Load the data
 all_data = pd.read_csv('vehicles.csv')
-
+all_data = all_data[:10]
+print(all_data)
 # Define the list of characteristics
 characteristics = [
     'Type', 'Year', 'Make', 'Model', 'Body', 'ModelNumber', 'Doors', 'ExteriorColor', 
@@ -18,7 +19,7 @@ characteristics = [
 rows = []
 print('loading....')
 # Iterate over each row in the data
-size = 100000
+size = 960
 while len(rows) < size:
     for index, row in all_data.iterrows():
         p1, p2, p3 = random.sample(characteristics, 3)
