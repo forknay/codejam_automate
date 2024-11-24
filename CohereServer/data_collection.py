@@ -1,14 +1,10 @@
 import cohere
+import pandas as pd
+import time
 
 co = cohere.ClientV2(
-    api_key="tuOMxlVSfG5jjOcgR2BtpBAWiiTdWUUaJB0JHP6H",
+    api_key="wHTzipjDKS7rkm4LkIp0ryuOFBmwzmjvpDQneGlC",
 )
-
-#system_preset = """ ## Task and Context
-   # Create me a chat input indexed by 1) and a chat output indexed by 2).
-  #  The input are users requesting recommendations and information within a car inventory. The output answers in a
- #   friendly manner and informatively recommending the user with a car model replaced with the variable X.
-#"""
 
 def generate_text_input(message):
     # Generate the response by streaming it
@@ -23,7 +19,7 @@ def generate_text_input(message):
     for event in response:
         if event.type == "content-delta":
             bot_response += event.delta.message.content.text
-            return bot_response
+    return bot_response
         
 def generate_text_output(message):
     # Generate the response by streaming it
@@ -38,26 +34,57 @@ def generate_text_output(message):
     for event in response:
         if event.type == "content-delta":
             bot_response += event.delta.message.content.text
-            return bot_response
+    return bot_response
 
-#Setting up prompts and chat history for 2 chatbots that convert a robotic-like input into something more human
+#---------------------------------------#
+
+# Load the original data
+data = pd.read_json('prompts.jsonl', lines=True)
+
+# Extract the 'User' and 'Chatbot' messages
+input_output_pairs = []
+for index, row in data.iterrows():
+    user_message = row["messages"][1]['content']
+    chatbot_message = row["messages"][2]['content']
+    input_output_pairs.append({'Input': user_message, 'Output': chatbot_message})
+
+# Create a DataFrame with the extracted messages
+input_output_df = pd.DataFrame(input_output_pairs)
+
+
 system_preset_input = """## Task and Context
 Reword the input as a message from a very straight-forward customer who is inquiring about car characteristics for their requirements. Always mention your requirements. Very important sentences must be under 100 characters. 
 """
-chat_log_input = [{'role': 'system', 'content': system_preset_input}]
-
 system_preset_output = """## Task and Context
 Reword the input as a message from a friendly, straight forward salesman would give to a customer about a car. Mention the model you recommend with information related to the customers inquiries. Very important sentences must be under 100 characters.
 """
-chat_log_output = [{'role': 'system', 'content': system_preset_output}]
 
+# Print the resulting DataFrame
+print(input_output_df.head())
+i = 0
+counter = 0
 
-message_input = "Hi!, I am looking for a car with Model CX-9, Engine_Block_Type I and PassengerCapacity 7."
-chat_log_input.append({'role': 'user', 'content': message_input})
+for index, row in data.iterrows():
+    if i <= 4:
+        chat_log_input = [{'role': 'system', 'content': system_preset_input}] #getting the chat history
+        chat_log_output = [{'role': 'system', 'content': system_preset_output}]
 
-message_output = "I would recommend the Levante (C120321)."
-chat_log_output.append({'role': 'user', 'content': message_output})
+        input_message = data.at[index, 'messages'][1]['content'] #getting the string messages of each
+        output_message = data.at[index, 'messages'][2]['content']
 
-input_generate = generate_text_input(message_input)
-print()
-output_generate = generate_text_output(message_output)
+        chat_log_input.append({'role': 'user', 'content': input_message}) #getting into a chat history
+        chat_log_output.append({'role': 'user', 'content': output_message})
+
+        data.at[index, 'messages'][1]['content'] = generate_text_input(data.at[index, 'messages'][1]['content'])
+        data.at[index, 'messages'][2]['content'] = generate_text_output(data.at[index, 'messages'][1]['content'])
+        
+        i += 1
+        counter += 1
+        print(f'Currently at the {counter}th iteration')
+
+    else:
+        time.sleep(60) #wait 60s because we have the free version. Limited to 40 API calls per minute
+        i = 0
+
+# Save the updated DataFrame to a new JSONL file
+data.to_json('updated_prompts.jsonl', orient='records', lines=True)
