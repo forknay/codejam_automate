@@ -27,6 +27,18 @@ class ChatService {
     final String currentUserEmail = _auth.currentUser!.email!;
     final Timestamp timestamp = Timestamp.now();
 
+    // get user stream
+  Stream<List<Map<String, dynamic>>> getUserStream() {
+    return _firestore.collection("Users").snapshots().map((snapshot) {
+      return snapshot.docs.map((doc) {
+        // go through each individual user
+        final user = doc.data();
+
+        // return user
+        return user;
+      }).toList();
+    });
+  }
 
     // create new message
     Message newMessage = Message(
