@@ -1,7 +1,6 @@
 import 'package:car_rec_chatbot/models/message.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
 
 class ChatService {
   // get instance of firestore
@@ -31,8 +30,8 @@ class ChatService {
 
     // create new message
     Message newMessage = Message(
-      senderID: currentUserEmail,
-      senderEmail: currentUserID,
+      senderID: currentUserID,
+      senderEmail: currentUserEmail,
       receiverID: receiverID,
       message: message,
       timestamp: timestamp,
