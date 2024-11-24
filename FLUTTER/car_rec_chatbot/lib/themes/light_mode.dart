@@ -12,10 +12,20 @@ ThemeData lightMode = ThemeData(
 
 ThemeData darkMode = ThemeData(
   colorScheme: ColorScheme.dark(
-    surface: const Color.fromARGB(255, 13, 4, 41),
-  primary: const Color.fromRGBO(255, 238, 238, 1),
-    secondary: const Color.fromARGB(255, 255, 255, 255).withOpacity(0.5),
+    surface: const Color.fromARGB(255, 0, 3, 27),
+    primary: Colors.white,
+    inversePrimary: const Color.fromARGB(255, 91, 102, 233),
+    secondary: Colors.white.withOpacity(0.1),
     tertiary: Colors.black,
-    inversePrimary: const Color.fromARGB(255, 96, 96, 127),
   ),
+);
+
+ThemeData bluetheme = ThemeData(
+  colorScheme: ColorScheme.dark(
+    surface: const Color.fromARGB(255, 169, 188, 208),
+    primary: Color.fromARGB(255, 216, 219, 226),
+    inversePrimary: Color.fromARGB(255,55,63,81),
+    secondary: Colors.white.withOpacity(0.1),
+    tertiary: Color.fromARGB(255, 31, 42, 69),
+),
 );
